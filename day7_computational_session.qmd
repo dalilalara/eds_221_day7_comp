@@ -3,13 +3,15 @@ title: "Joins, strings and dates"
 format: html
 editor: visual
 ---
+
 ```{r}
 library(datapasta)
 library(dplyr)
 library(palmerpenguins)
 ```
 
-# Joins 
+# Joins
+
 ```{r}
 animals <- tibble::tribble(
              ~location,   ~species,  ~maturity,
@@ -32,18 +34,21 @@ sites <- tibble::tribble(
 ```
 
 ## Full Join
+
 ```{r}
 #nothing gets ommited from data frame when combining data frames
 full_join_example <- full_join(animals, sites )
 ```
 
 ## Left Join
+
 ```{r}
 #takes x data and joins to x that has key value
 left_join_example <- left_join(animals, sites)
 ```
 
 ## Inner Join
+
 ```{r}
 inter_join_example <- inner_join(animals, sites, by = "location")
 
@@ -54,26 +59,29 @@ sites_2 <- sites |>
 ```
 
 Example of joining when key variables have non mathcing names
+
 ```{r}
 nonmatching <- full_join(animals, sites, by = c("location" = "loc"))
 ```
 
-
 # Filter Join
 
 ## Semi Join
+
 ```{r}
 semi_join_example <- semi_join(animals, sites, by = "location" )
 ```
 
 ## Anti Join
+
 Where only observation don't have a match are returned
+
 ```{r}
 anit_join_example <- anti_join(animals, sites, by = "location")
 ```
 
-
 ## Data Wrangling Refersher
+
 ```{r}
 p_df <- penguins |>
   #filter(keeps rows)
@@ -85,4 +93,8 @@ p_df <- penguins |>
   #rename new name = old name
   rename(location = island)
 ```
+
+
+
+
 
