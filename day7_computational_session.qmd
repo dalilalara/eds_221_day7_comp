@@ -96,6 +96,7 @@ p_df <- penguins |>
 ```
 
 # Dates & Times with `lubridate`
+
 ```{r}
 # 1 
 #stores as character 
@@ -165,7 +166,6 @@ second(my_time)
 minute(my_time)
 ```
 
-
 ```{r}
 #Tells weekday of the date 
 teddy_bday <- lubridate::ymd("20170615")
@@ -176,6 +176,36 @@ dalila <- lubridate::ymd("20000901")
 wday(dalila, label = TRUE)
 month(dalila, label = TRUE)
 
+```
+
+### Parsing df ex
+
+```{r}
+urchin_counts <- tribble(
+  ~date, ~species, ~size_mm,
+  "10/3/2020", "purple", 55,
+  "10/4/2020", "red", 48,
+  "11/17/2020", "red", 67
+  )
+
+#change date format and make new columns/rename
+urchin_ymd <- urchin_counts |>
+  mutate(date = mdy(date)) |>
+  mutate(year = year(date),
+         month = month(date),
+         day = day(date))
+
+class(urchin_ymd$date)
+```
+
+```{r}
+day_1 <- ymd("2020-01-06")
+day_2 <- ymd("2020-05-18")
+
+time_interval <- interval(day_1, day_2)
+
+#gives the time length in years of the interval years created
+time_length(time_interval, "year")
 ```
 
 # Strings
