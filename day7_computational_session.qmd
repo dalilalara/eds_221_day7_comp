@@ -8,6 +8,7 @@ editor: visual
 library(datapasta)
 library(dplyr)
 library(palmerpenguins)
+library(lubridate)
 ```
 
 # Joins
@@ -94,7 +95,87 @@ p_df <- penguins |>
   rename(location = island)
 ```
 
+# Dates & Times with `lubridate`
+```{r}
+# 1 
+#stores as character 
+my_date <- "03-15-1998"
+
+#mdy, ymd, dmy
+
+#function transforms format mdy
+lubridate::mdy(my_date)
+
+# 2
+my_date <- "11/07/2003"
+lubridate::dmy(my_date)
+
+# 3 
+my_date <- "08-Jun-1974"
+lubridate::dmy(my_date)
+
+# 4 
+my_date <- "19610518"
+my_real_date <- lubridate::ymd(my_date)
+# character
+class(my_date)
+# stored as date
+class(my_real_date)
+```
+
+```{r}
+# 5
+lubridate::ymd("1942-08-30")
+
+# 6
+lubridate::mdy("09/22/84")
+
+```
+
+```{r}
+# 7 time example 
+time <- "2020-08-12 11:18"
+lubridate::ymd_hm(time)
+class(time)
+```
+
+```{r}
+# convert time zones 
+# all time zonesOlsonNames()
+
+with_tz(time, "America/Los_Angeles")
+
+with_tz(time, "America/New_York")
+
+with_tz(time, "Europe/London")
+
+with_tz(time, "Asia/Jakarta")
+
+with_tz(time, "Europe/Rome")
+```
+
+```{r}
+time <- "2020-08-12 11:18"
+
+my_time <- ydm_hms(time)
+
+year(my_time)
+hour(my_time)
+second(my_time)
+minute(my_time)
+```
 
 
+```{r}
+#Tells weekday of the date 
+teddy_bday <- lubridate::ymd("20170615")
+wday(teddy_bday, label = TRUE)
 
+#bday 
+dalila <- lubridate::ymd("20000901")
+wday(dalila, label = TRUE)
+month(dalila, label = TRUE)
 
+```
+
+# Strings
